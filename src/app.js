@@ -1,12 +1,12 @@
-const cors  = require('cors');
-const express = require('express');
-const bodyParser = require('body-parser');
-const intersection = require('lodash/intersection');
+import cors from 'cors';
+import express from 'express';
+import bodyParser from 'body-parser';
+import intersection from 'lodash/intersection';
 
-const toCSV = require('./csv');
-const data = require('./data');
-const init = require('./model');
-const toHTML = require('./html');
+import toCSV from './csv';
+import data from './data';
+import init from './model';
+import toHTML from './html';
 
 const app = express();
 
@@ -201,4 +201,4 @@ app.delete('/students/:id', (request, response) => {
   response.status(204).send();
 });
 
-module.exports = app;
+export default app;

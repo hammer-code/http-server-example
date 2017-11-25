@@ -1,4 +1,4 @@
-const html = require('src/html');
+import html from 'src/html';
 
 const data = [
   { title: 'Arduino Uno', price: 20 },

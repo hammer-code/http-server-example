@@ -1,7 +1,5 @@
-const app = require('./src/app');
+'use strict';
 
-const PORT = process.env.PORT || 3000;
+require = require('@std/esm')(module);
 
-app.listen(PORT, () => {
-  console.log('Running on PORT %s', PORT);
-});
+module.exports = require('./main').default;

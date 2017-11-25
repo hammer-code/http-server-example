@@ -88,4 +88,4 @@ function init(data) {
   }
 }
 
-module.exports = init;
+export default init;

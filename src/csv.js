@@ -23,4 +23,4 @@ function toCsv(data) {
   return header + "\n" + toString(data);
 }
 
-module.exports = toCsv;
+export default toCsv;

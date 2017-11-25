@@ -1,4 +1,4 @@
-const csv = require('src/csv');
+import csv from 'src/csv';
 
 const data = [
   { title: 'Arduino Uno', price: 20 },

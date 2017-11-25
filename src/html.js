@@ -1,7 +1,7 @@
 function toParagraph(data) {
   const content = Object.keys(data)
     .map(key => `${key}: ${data[key]}`).join('.');
-  
+
   return `<p>${content}</p>`
 }
 
@@ -15,4 +15,4 @@ function toHTML(data) {
   return toParagraph(data);
 }
 
-module.exports = toHTML;
+export default toHTML;

@@ -1,5 +1,5 @@
-const init = require('src/model');
-const data = require('src/data');
+import init from 'src/model';
+import data from 'src/data';
 
 let model;
 

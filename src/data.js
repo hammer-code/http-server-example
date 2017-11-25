@@ -19,7 +19,7 @@ const pivot = [
   { studentId: 3, classId: 1 },
 ];
 
-module.exports = {
+export default {
   pivot,
   classes,
   students,
