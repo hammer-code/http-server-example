@@ -25,23 +25,27 @@ const makeValidate = (requiredFields = []) => (data) => {
   }
 };
 
+const format = (response) => (data) => {
+   response.format({
+    'default': () => {
+      response.json(data);
+    },
+    'application/json': () => {
+      response.json(data);
+    },
+    'text/csv': () => {
+      response.send(toCSV(data));
+    },
+    'text/html': () => {
+      response.send(toHTML(data));
+    },
+  });
+};
+
 app.get('/students', (request, response) => {
   const students = model.findAllStudent();
 
-  response.format({
-    'default': () => {
-      response.json(students);
-    },
-    'application/json': () => {
-      response.json(students);
-    },
-    'text/csv': () => {
-      response.send(toCSV(students));
-    },
-    'text/html': () => {
-      response.send(toHTML(students));
-    },
-  })
+  format(response)(students);
 });
 
 app.get('/students/:id', (request, response) => {
@@ -57,20 +61,7 @@ app.get('/students/:id', (request, response) => {
     return;
   }
 
-  response.format({
-    'default': () => {
-      response.json(student);
-    },
-    'application/json': () => {
-      response.json(student);
-    },
-    'text/csv': () => {
-      response.send(toCSV(student));
-    },
-    'text/html': () => {
-      response.send(toHTML(student));
-    },
-  })
+  format(response)(student);
 });
 
 app.get('/students/:id/classes', (request, response) => {
@@ -78,20 +69,7 @@ app.get('/students/:id/classes', (request, response) => {
 
   const classes = model.findStundentClasses(parseInt(studentId));
 
-  response.format({
-    'default': () => {
-      response.json(classes);
-    },
-    'application/json': () => {
-      response.json(classes);
-    },
-    'text/csv': () => {
-      response.send(toCSV(classes));
-    },
-    'text/html': () => {
-      response.send(toHTML(classes));
-    },
-  })
+  format(response)(classes);
 });
 
 app.patch('/students/:id', (request, response) => {
@@ -107,20 +85,7 @@ app.patch('/students/:id', (request, response) => {
     return;
   }
 
-  response.format({
-    'default': () => {
-      response.json(student);
-    },
-    'application/json': () => {
-      response.json(student);
-    },
-    'text/csv': () => {
-      response.send(toCSV(student));
-    },
-    'text/html': () => {
-      response.send(toHTML(student));
-    },
-  });
+  format(response)(student);
 });
 
 app.post('/students', (request, response) => {
@@ -134,20 +99,7 @@ app.post('/students', (request, response) => {
     return;
   }
 
-  response.format({
-    'default': () => {
-      response.json(student);
-    },
-    'application/json': () => {
-      response.json(student);
-    },
-    'text/csv': () => {
-      response.send(toCSV(student));
-    },
-    'text/html': () => {
-      response.send(toHTML(student));
-    },
-  });
+  format(response)(student);
 });
 
 app.put('/students/:id', (request, response) => {
@@ -171,20 +123,7 @@ app.put('/students/:id', (request, response) => {
     return;
   }
 
-  response.format({
-    'default': () => {
-      response.json(student);
-    },
-    'application/json': () => {
-      response.json(student);
-    },
-    'text/csv': () => {
-      response.send(toCSV(student));
-    },
-    'text/html': () => {
-      response.send(toHTML(student));
-    },
-  })
+  format(response)(student);
 });
 
 app.delete('/students/:id', (request, response) => {
