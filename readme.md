@@ -1,9 +1,13 @@
 # http-server-example
 
+## Requirements
+- Node JS 8.11+
+
 ## Setup
 
-`npm install`
-`npm run dev`
+Untuk menjalankan server, lakukan hal berikut:
+- Install dependencies `npm install`
+- Jalankan server `npm run dev`
 
 ## Endpoints
 
