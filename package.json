@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_PATH=. nodemon --exec \"node index.js\"",
     "start": "NODE_PATH=. node index.js",
-    "test": "NODE_PATH=. jest --verbose"
+    "test": "NODE_PATH=. jest --verbose --coverage"
   },
   "keywords": [],
   "author": "",
