@@ -1,5 +1,6 @@
 import init from 'src/model';
 import data from 'src/data';
+import { ModelNotFound } from 'src/error';
 
 let model;
 
@@ -19,11 +20,12 @@ describe('findStudent', () => {
   });
 
   test('throw error when not found', () => {
-    try {
+    const tryToFindStudent = () => {
       model.findStudent(100)
-    } catch (err) {
-      expect(err.message).toBe('Student with ID of 100 was not found.');
-    }
+    };
+
+    expect(tryToFindStudent).toThrow(ModelNotFound);
+    expect(tryToFindStudent).toThrow('Student with ID of 100 was not found.');
   });
 });
 
@@ -61,13 +63,12 @@ describe('updateStudent', () => {
   });
 
   it('should throw error when student is not found', () => {
-    const ID = 1000;
+    const tryToUpdateStudent = () => {
+      model.updateStudent(1000, { name: 'John Doe' });
+    };
 
-    try {
-      model.updateStudent(ID, { name: 'John Doe' });
-    } catch (err) {
-      expect(err.message).toBe('Student with ID of 1000 was not found.');
-    }
+    expect(tryToUpdateStudent).toThrow(ModelNotFound);
+    expect(tryToUpdateStudent).toThrow('Student with ID of 1000 was not found.');
   });
 });
 
@@ -79,21 +80,23 @@ describe('replaceStudent', () => {
 
     expect(student).toEqual(newStudent);
 
-    try {
+    const tryToFindStudent = () => {
       model.findStudent(1);
-    } catch (err) {
-      expect(err.message).toBe('Student with ID of 1 was not found.');
-    }
+    };
+
+    expect(tryToFindStudent).toThrow(ModelNotFound);
+    expect(tryToFindStudent).toThrow('Student with ID of 1 was not found.');
   });
 
   it('should throw error when student is not found', () => {
     const ID = 1000;
 
-    try {
+    const tryToReplaceStudent = () => {
       model.replaceStudent(ID, { name: 'John Doe' });
-    } catch (err) {
-      expect(err.message).toBe('Student with ID of 1000 was not found.');
     }
+
+    expect(tryToReplaceStudent).toThrow(ModelNotFound);
+    expect(tryToReplaceStudent).toThrow('Student with ID of 1000 was not found.');
   });
 });
 
@@ -102,23 +105,49 @@ describe('deleteStudent', () => {
     const ID = 1;
     model.deleteStudent(1);
 
-    let result;
-    try {
-      result = model.findStudent(1);
-    } catch (err) {
-      expect(err.message).toBe('Student with ID of 1 was not found.');
-    }
+    const tryToFindStudent = () => {
+      model.findStudent(1);
+    };
 
-    expect(result).toBe(undefined);
+    expect(tryToFindStudent).toThrow(ModelNotFound);
+    expect(tryToFindStudent).toThrow('Student with ID of 1 was not found.');
   });
 
   it('should throw error when student is not found', () => {
     const ID = 1000;
 
-    try {
+    const tryToDeleteStudent = () => {
       model.deleteStudent(ID);
-    } catch (err) {
-      expect(err.message).toBe('Student with ID of 1000 was not found.');
-    }
+    };
+
+    expect(tryToDeleteStudent).toThrow(ModelNotFound);
+    expect(tryToDeleteStudent).toThrow('Student with ID of 1000 was not found.');
+  });
+});
+
+describe('findStudentClasses', () => {
+  it('should return correct data', () => {
+    expect(model.findStudentClasses(1)).toEqual([
+      { id: 1, name: 'Kalkulus' },
+      { id: 2, name: 'Algoritma Pemograman' },
+      { id: 3, name: 'Statistika' },
+    ]);
+
+    expect(model.findStudentClasses(2)).toEqual([
+      { id: 1, name: 'Kalkulus' },
+      { id: 3, name: 'Statistika' },
+    ]);
+
+    expect(model.findStudentClasses(3)).toEqual([
+      { id: 1, name: 'Kalkulus' },
+    ]);
+  });
+
+  it('should throw error when trying to find non-existing student\'s classes', () => {
+    const tryToFindStudentClasses = () => {
+      model.findStudentClasses(4);
+    };
+
+    expect(tryToFindStudentClasses).toThrow(ModelNotFound);
   });
 });

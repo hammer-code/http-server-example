@@ -1,4 +1,5 @@
 import html from 'src/html';
+import { InvalidArgumentError } from 'src/error';
 
 const data = [
   { title: 'Arduino Uno', price: 20 },
@@ -13,4 +14,13 @@ test('can create html from array', () => {
 test('can create html from object', () => {
   const product = data[0];
   expect(html(product)).toContain('<p>title: Arduino Uno.price: 20</p>');
+});
+
+test('cannot create html from empty array', () => {
+  const tryToCreateHTML = () => {
+    html([]);
+  };
+
+  expect(tryToCreateHTML).toThrow(InvalidArgumentError);
+  expect(tryToCreateHTML).toThrow('data: Array argument should has at least one object element.');
 });

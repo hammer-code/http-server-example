@@ -1,3 +1,5 @@
+import { ModelNotFound } from './error';
+
 function init(data) {
   let { students, classes, pivot } = Object.assign({}, data);
 
@@ -5,7 +7,9 @@ function init(data) {
     return students;
   }
 
-  function findStundentClasses(id) {
+  function findStudentClasses(id) {
+    findStudent(id);
+
     return pivot.filter((p) => p.studentId === id)
       .map((p) => classes.find(c => c.id === p.classId));
   }
@@ -71,7 +75,7 @@ function init(data) {
     const student = students.find((s) => s.id === parseInt(id));
 
     if (!student) {
-      throw new Error(`Student with ID of ${id} was not found.`);
+      throw new ModelNotFound(`Student with ID of ${id} was not found.`);
     }
 
     return student;
@@ -84,7 +88,7 @@ function init(data) {
     deleteStudent,
     findAllStudent,
     replaceStudent,
-    findStundentClasses,
+    findStudentClasses,
   }
 }
 
