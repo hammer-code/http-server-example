@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/hammer-code/http-server-example.svg?style=svg)](https://circleci.com/gh/hammer-code/http-server-example) [![codecov](https://codecov.io/gh/hammer-code/http-server-example/branch/master/graph/badge.svg)](https://codecov.io/gh/hammer-code/http-server-example)
 
 ## Requirements
-- Node JS 8.11+
+- Node JS 8.9+
 
 ## Setup
 
