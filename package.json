@@ -22,6 +22,7 @@
     "babel-core": "^6.26.0",
     "babel-jest": "^21.2.0",
     "babel-preset-env": "^1.6.1",
+    "codecov": "^3.0.0",
     "es6-error": "^4.0.2",
     "jest": "^21.2.1",
     "nodemon": "^1.12.1"
